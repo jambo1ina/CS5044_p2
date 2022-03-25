@@ -1,0 +1,17 @@
+Variable Name,Description,Comments
+inwyr,Year of interview,"Rounds 1 and 2 use this variables, whilst the rest use inwyr"
+inwyys,"Start of interview, year",Rounds 3+ use this instead of inwyr
+cntry,Country,2-letter country code
+polintr,How interested in politics,"1-8, very interested - no interest, 9 no answer"
+trstprl,Trust in country's parliament,"0-10, no trust - complete trust, 77,88,99 no answer"
+vote,Voted last election,"1, 2 Y-N, 3 not eligible, 4-9 no answer"
+prtvt*,Party voted for in last election,Changes per country
+lrscale,Placement on left-right scale,"0-9 left-right, 77,88,99 no answer"
+imwbcnt,Immigrants make country better or worse place to live,"0-10 worse-better, 77,88,99 no answer"
+edulvlb,Highest level of education,0-800 less-more educated
+emplrel,Employment (unemployed etc),"1-3 employed, 6 unemployed"
+gndr,Gender,"1 M, 2 F, 9 no answer"
+pdjobyr,Year last in paid job,6666-9999 no answer
+hincfel,Feeling about household income,"1-4 comfortable-difficult, 7=9 no answer"
+uemp12m,Any period of unemployment/work seeking lasted 12m or more,"1 Y, 2 N, 6-9 no answer"
+chldhhe,Ever had children living in household,"1Y, 2N, 6-9 no answer"
