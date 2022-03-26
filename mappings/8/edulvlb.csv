@@ -1,32 +1,3 @@
-Highest level of education
-0,Not completed ISCED level 1
-113,ISCED 1, completed primary education
-129,Vocational ISCED 2C < 2 years, no access ISCED 3
-212,General/pre-vocational ISCED 2A/2B, access ISCED 3 vocational
-213,General ISCED 2A, access ISCED 3A general/all 3
-221,Vocational ISCED 2C >= 2 years, no access ISCED 3
-222,Vocational ISCED 2A/2B, access ISCED 3 vocational
-223,Vocational ISCED 2, access ISCED 3 general/all
-229,Vocational ISCED 3C < 2 years, no access ISCED 5
-311,General ISCED 3 >=2 years, no access ISCED 5
-312,General ISCED 3A/3B, access ISCED 5B/lower tier 5A
-313,General ISCED 3A, access upper tier ISCED 5A/all 5
-321,Vocational ISCED 3C >= 2 years, no access ISCED 5
-322,Vocational ISCED 3A, access ISCED 5B/ lower tier 5A
-323,Vocational ISCED 3A, access upper tier ISCED 5A/all 5
-412,General ISCED 4A/4B, access ISCED 5B/lower tier 5A
-413,General ISCED 4A, access upper tier ISCED 5A/all 5
-421,ISCED 4 programmes without access ISCED 5
-422,Vocational ISCED 4A/4B, access ISCED 5B/lower tier 5A
-423,Vocational ISCED 4A, access upper tier ISCED 5A/all 5
-510,ISCED 5A short, intermediate/academic/general tertiary below bachelor
-520,ISCED 5B short, advanced vocational qualifications
-610,ISCED 5A medium, bachelor/equivalent from lower tier tertiary
-620,ISCED 5A medium, bachelor/equivalent from upper/single tier tertiary
-710,ISCED 5A long, master/equivalent from lower tier tertiary
-720,ISCED 5A long, master/equivalent from upper/single tier tertiary
-800,ISCED 6, doctoral degree
-5555,Other
-7777,Refusal
-8888,Don't know
-9999,No answer
+version https://git-lfs.github.com/spec/v1
+oid sha256:c96dcf601d807ebfa88afa3d3e46566a96693467dd3c7be083171e72880ab53c
+size 1563

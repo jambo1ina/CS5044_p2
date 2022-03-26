@@ -1,21 +1,3 @@
-Party voted for in last national election, Turkey
-1,Adalet Kalkinma Partisi (AKP)
-2,Anavatan Partisi (ANAP)
-3,Buyuk Birlik Partisi (BBP)
-4,Cumhuriyet Halk Partisi (CHP)
-5,Demokrat Parti (DP)
-6,Demokratik Toplum Partisi (DTP)
-7,Demokratik Sol Parti (DSP)
-8,Emek Partisi (EMEP)
-9,Isci Partisi (IP)
-10,Milliyetci Hareket Partisi (MHP)
-11,Ozgurluk Dayanisma Partisi (ODP)
-12,Saadet Partisi (SP)
-13,Sosyal Demokrat Halkci Parti (SHP)
-14,T. Komunist Partisi (TKP)
-15,Other party or independent candidate
-16,Cast invalid vote
-66,Not applicable
-77,Refusal
-88,Don't know
-99,No answer
+version https://git-lfs.github.com/spec/v1
+oid sha256:8fd046de13a6b2ee4c8a4417ed85d48d57f2e65c2177a20e636d18ea5da65c2d
+size 575

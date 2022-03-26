@@ -1,21 +1,3 @@
-Party voted for in last national election, France (ballot 1)
-1,CPNT (Chasse, Pêche, Nature et Traditions)
-2,DL (Démocratie Libérale)
-3,FN (Front National)
-4,LCR (ligue communiste révolutionnaire)
-5,LO (Lutte ouvrière)
-6,MDC (Mouvement des citoyens)
-7,MNR (Mouvement National Républicain)
-8,MPF (Mouvement pour la France)
-9,PC (Parti communiste)
-10,PS (Parti Socialiste)
-11,RPF (Rassemblement du Peuple Français)
-12,UMP (Union de la Majorité Présidentielle)
-13,UDF (Union pour la Démocratie Française)
-14,Les Verts
-15,Autres mouvements écologistes
-16,Autre
-66,Not applicable
-77,Refusal
-88,Don't know
-99,No answer
+version https://git-lfs.github.com/spec/v1
+oid sha256:f77d4365c2222bfc1956df1dbf7cabf8c5cafed6ee5a4af5d551b214413a0bc6
+size 624

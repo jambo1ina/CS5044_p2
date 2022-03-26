@@ -1,28 +1,3 @@
-Party voted for in last national election, Spain
-1,PP
-2,PSOE
-3,Unidas Podemos
-4,Podemos
-5,Ciudadanos
-6,IU
-7,En Comú Podem
-8,Más País
-9,Compromís
-10,ERC
-11,Junts per Catalunya/PDeCAT
-12,Bloque Nacionalista Galego
-13,EAJ-PNV
-14,EH-Bildu
-15,CC-PNC
-16,VOX
-17,Navarra Suma
-18,PACMA
-19,CUP
-20,PRC
-53,Other
-54,Blank vote
-55,Invalid vote
-66,Not applicable
-77,Refusal
-88,Don't know
-99,No answer
+version https://git-lfs.github.com/spec/v1
+oid sha256:654c78b906258caee0c4ad73634e658d761f660b312cb9e7fb76f5a374f1d9ec
+size 390
