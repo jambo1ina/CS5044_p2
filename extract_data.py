@@ -31,13 +31,14 @@ for variable in variableNames:
                        break
                     else:
                         for heading in line:
-                            if heading.startswith(prefix):
+                            if heading.startswith(prefix) and heading not in expandedVariablesNames:
                                 expandedVariablesNames.append(heading)
 
     else:
         expandedVariablesNames.append(variable)
 
-print("extracting: ", expandedVariablesNames)
+print("variables: ", variableNames)
+print("expanded: ", expandedVariablesNames)
 print("to file: ", OUTPUT_CSV)
 
 #genereate output CSV
