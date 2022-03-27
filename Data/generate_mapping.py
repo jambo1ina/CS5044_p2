@@ -26,7 +26,7 @@ def generate_mappings(input_xmls, output_dir, variables):
 
                     with open(output_dir + round + "/" + name + ".csv", 'w') as out:
                         out.write(description + "\n")
-                        print(mapping)
+                        
                         for key in mapping.keys():
                             out.write(key + "," + mapping[key] + "\n")
             except KeyError:
