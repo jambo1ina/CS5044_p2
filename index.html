@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>European Social Survey</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="visualisation.js"></script>
+    </head>
+
+    <body>
+        <p id="loading">Loading...</p>
+
+        <div id="controls">
+            
+        </div>
+
+        <div id="visualisation">
+
+        </div>
+
+        <script> 
+			const essDataPath = "data.csv"
+            const historyDataPath = "history.csv"
+
+            let ess = undefined;
+            let data = undefined;
+
+            let selectedCountry = "Austria";
+            let countries = undefined;
+            let partyCounts = undefined;
+
+			d3.csv(essDataPath).then(function(essData) {
+				d3.csv(historyDataPath).then(function(historyData) {
+                    //hide loading message once data has loaded
+                    let loadingMsg = document.getElementById("loading");
+                    loadingMsg.style.display = "none";
+
+                    ess = essData;
+                    history = historyData;
+
+                    init();
+                });
+			});
+		</script>
+    </body>
+</html>

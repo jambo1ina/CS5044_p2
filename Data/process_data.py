@@ -67,25 +67,38 @@ def processData(input_csv, output_csv, variablesNames, mappings, delimiter=","):
 
                         for round in mappings.keys():
                             if heading in mappings[round]:
-                                description = mappings[round][heading]["description"]
+                                description = mappings[round][heading]["description"].replace(" ", "_")
                                 break
 
                         out.write(description + ",")
                     out.write("\n")
                 else:
                     round = str(line[0])
+                    expanded = []
+
                     for j,item in enumerate(line):
                         if item == "":
                             continue
 
                         if expandedVariableNames[j] in expansionMap:
-                            if item == "-" or item == "0":
+                            expanding = expansionMap[expandedVariableNames[j]]
+
+                            if expanding in expanded:
                                 continue
+                            
+                            elif item == "-" or item == "0":
+                                if (expandedVariableNames[j+1] in expansionMap and expansionMap[expandedVariableNames[j+1]] == expanding):
+                                    continue
+                                else:
+                                    out.write(item + ",")
+                                    
                             else:
                                 if expandedVariableNames[j] in mappings[round] and item in mappings[round][expandedVariableNames[j]]:
                                     out.write(mappings[round][expandedVariableNames[j]][item] + ",")
                                 else:
                                     out.write(item + ",") 
+
+                                expanded.append(expanding)
                         else:
                             if expandedVariableNames[j] in mappings[round] and item in mappings[round][expandedVariableNames[j]]:
                                 out.write(mappings[round][expandedVariableNames[j]][item] + ",")
