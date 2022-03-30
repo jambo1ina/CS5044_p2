@@ -1,3 +1,55 @@
-body {
+html, body {
     overflow: hidden;
+    width:100%;
+    height: 100%;
+    padding: 0; 
+    margin: 0;
+}
+
+#container {
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+    display: none;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 3fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "Bar Map"
+      "Slider Slider"; 
+}
+
+#bar { 
+    grid-area: Bar;
+    background-color: red;
+}
+
+#map { 
+    grid-area: Map; 
+    position: relative;
+}
+
+#map-controls { 
+    margin: 0.5%;
+    padding: 0.5%;
+    background-color: white;
+    border: 1px solid;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right:0;
+}
+
+#map-visualisation {
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:1;
+}
+
+#slider { 
+    grid-area: Slider; 
+    background-color: blue;
 }

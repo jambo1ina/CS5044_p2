@@ -51,7 +51,6 @@ def processData(input_csv, output_csv, variablesNames, mappings, delimiter=","):
                                     if expanded.startswith(prefix):
                                         expansionMap[expanded] = var
 
-                    # out.write(str(variablesNames).replace("[" , "").replace("]", "") + "\n")
                     for heading in variablesNames:
                         if heading == "":
                             continue
@@ -67,7 +66,7 @@ def processData(input_csv, output_csv, variablesNames, mappings, delimiter=","):
 
                         for round in mappings.keys():
                             if heading in mappings[round]:
-                                description = mappings[round][heading]["description"].replace(" ", "_")
+                                description = mappings[round][heading]["description"].replace(" ", "_").replace("'", "")
                                 break
 
                         out.write(description + ",")

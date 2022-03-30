@@ -5,17 +5,49 @@
         <link rel="stylesheet" href="style.css">
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="visualisation.js"></script>
+        <script src="map.js"></script>
     </head>
 
     <body>
         <p id="loading">Loading...</p>
 
-        <div id="controls">
-            
-        </div>
+        <div id="container">
+            <div id="bar">
+                <div id="bar-controls">
 
-        <div id="visualisation">
+                </div>
 
+                <div id="bar-visualisation">
+
+                </div>
+            </div>
+    
+            <div id="map">
+                <form id="map-controls" onchange="mapModeHandler();">
+                    <legend>Mode:</legend>
+                    <input type="radio" name="map-mode" value="leftRight">Left/Right<br>
+                    <input type="radio" name="map-mode" value="interest">Interest in politics<br>
+                    <input type="radio" name="map-mode" value="voted">Voters (%)<br>
+                    <input type="radio" name="map-mode" value="trust">Trust in parliment<br>
+                    <input type="radio" name="map-mode" value="unemployment">Unemployment (%)<br>
+                    <input type="radio" name="map-mode" value="immigrants">Immigration Opinion<br>
+                    <button type="button" onclick="clearMapHandler();">Clear</button> 
+                </form>
+
+                <canvas id="map-visualisation">
+
+                </canvas>
+            </div>
+    
+            <div id="slider">
+                <div id="slider-controls">
+                    
+                </div>
+
+                <div id="slider-visualisation">
+                    
+                </div>
+            </div>
         </div>
 
         <script> 
@@ -24,20 +56,24 @@
 
             let ess = undefined;
             let data = undefined;
-
-            let selectedCountry = "Austria";
-            let countries = undefined;
-            let partyCounts = undefined;
+            let dataByCountry = {};
 
 			d3.csv(essDataPath).then(function(essData) {
 				d3.csv(historyDataPath).then(function(historyData) {
+                    ess = essData;
+                    history = historyData;
+
+                    generateDataByCountry();
+
                     //hide loading message once data has loaded
                     let loadingMsg = document.getElementById("loading");
                     loadingMsg.style.display = "none";
 
-                    ess = essData;
-                    history = historyData;
+                    //show container
+                    let container = document.getElementById("container");
+                    container.style.display = "grid";
 
+                    window.onresize = init;
                     init();
                 });
 			});

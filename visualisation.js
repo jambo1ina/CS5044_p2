@@ -1,107 +1,162 @@
+let slider = {
+    start:2003,
+    end: 2019,
+}
+
 function init() {
-    countries = getCountries(ess);
-
-    let select = document.createElement("select");
-    select.name = "country";
-    select.id = "select-country";
-
-    for (const country of countries) {
-        let option = document.createElement("option");
-        option.value = country;
-        option.text = country;
-
-        select.appendChild(option);
-    }
-
-    let label = document.createElement("label");
-    label.innerHTML = "Country: "
-    label.htmlFor = select.id;
-
-    select.addEventListener("change", handleChangeCountry);
-
-    document.getElementById("controls").appendChild(label).appendChild(select);
-    document.getElementById(select.id).value = selectedCountry;
-
-    partyCounts = getPartyCounts(ess, selectedCountry);
-    visualise();
+    initMap();
 }
 
-function handleChangeCountry() {
-    let select = document.getElementById("select-country");
+function generateDataByCountry() {
+    dataByCountry = {}
 
-    if (select) {
-        selectedCountry = select.value;
-        partyCounts = getPartyCounts();
-        visualise();
-    }
-}
-
-function visualise() {
-    //remove all existing content
-    document.getElementById("visualisation").innerHTML = "";
-
-    const minFont = 6;
-    const maxFont = window.innerHeight / (1.7 * Object.keys(partyCounts).length);
-
-    let extent = d3.extent(Object.entries(partyCounts), function([party, count]) {
-        return count;
-    });
-
-    let scale = d3.scaleLinear()
-        .range([minFont, maxFont])
-        .domain(extent);
-
-    d3.select("#visualisation")
-        .selectAll("p")
-        .data(Object.entries(partyCounts))
-        .enter()
-        .append("p")
-        .text(function([party, count]) {
-            return party;
-        })
-        .style("font-size", function([party, count]) {
-            return scale(count) + "pt";
-        });
-}
-
-function getCountries() {
-    countries = []
-
-    for(let i = 0; i < ess.length; i++) {
-        let interview = ess[i];
-        
+    //populate
+    for (interview of ess) {
         let country = interview.Country;
+        let year = interview.Year_of_interview;
 
-        if (!countries.includes(country)) {
-            countries.push(country);
+        if (dataByCountry[country] == undefined) {
+            dataByCountry[country] = {};
+        }
+
+        if (dataByCountry[country][year] == undefined) {
+            dataByCountry[country][year] = {}
+
+            dataByCountry[country][year].total = 0;
+
+            dataByCountry[country][year].interest = 0;
+            dataByCountry[country][year].trust = 0;
+            dataByCountry[country][year].voted = 0;
+            dataByCountry[country][year].leftRight = 0;
+            dataByCountry[country][year].immigrants = 0;
+            dataByCountry[country][year].unemployment = 0;
+            dataByCountry[country][year].children = 0;
+            dataByCountry[country][year].age = 0;
+        }
+
+        dataByCountry[country][year].total++;
+
+        switch(interview.How_interested_in_politics) {
+            case "Very interested":
+                dataByCountry[country][year].interest += 100;
+            break;
+
+            case "Quite interested":
+                dataByCountry[country][year].interest += 66;
+            break;
+
+            case "Hardly interested":
+                dataByCountry[country][year].interest += 33;
+            break;
+        }
+
+        switch(interview.Trust_in_countrys_parliament) {
+            case "No trust at all":
+            case "Refusal":
+            case "Don't know":
+            case "No answer":
+                dataByCountry[country][year].trust += 0;
+            break;
+
+            case "Complete trust":
+                dataByCountry[country][year].trust += 100;
+            break;
+
+            default:
+                dataByCountry[country][year].trust += parseInt(interview.Trust_in_countrys_parliament) * 10;
+        }
+
+        if (interview.Voted_last_national_election == "Yes") {
+            dataByCountry[country][year].voted++;
+        }
+
+        switch(interview.Placement_on_left_right_scale) {
+            case "Left":
+                dataByCountry[country][year].leftRight -= 5;
+            break;
+
+            case "Right":
+                dataByCountry[country][year].leftRight += 5;
+            break
+
+            case "Refusal":
+            case "Don't know":
+            case "No Answer":
+                dataByCountry[country][year].leftRight += 0;
+            break;
+
+            default:
+                let val = parseInt(interview.Placement_on_left_right_scale);
+                dataByCountry[country][year].leftRight += (-5 + val);
+        }
+
+        switch(interview.Immigrants_make_country_worse_or_better_place_to_live) {
+            case "Better place to live":
+                dataByCountry[country][year].immigrants += 5;
+            break;
+
+            case "Worse place to live":
+                dataByCountry[country][year].immigrants += -5;
+            break;
+
+            case "Refusal":
+            case "Don't know":
+            case "No answer":
+                dataByCountry[country][year].immigrants += 0;
+            break;
+
+            default:
+                let val = parseInt(interview.Immigrants_make_country_worse_or_better_place_to_live);
+                dataByCountry[country][year].immigrants += (-5 + val);
+        }
+        
+        if (interview.Any_period_of_unemployment_and_work_seeking_lasted_12_months_or_more == "Yes") {
+            dataByCountry[country][year].unemployment += 1;
+        }
+
+        if (interview.Ever_had_children_living_in_household == "Yes") {
+            dataByCountry[country][year].children  += 1;
+        }
+        
+        let age = parseInt(interview.Age_of_respondent)
+        if (age > 0) {
+            dataByCountry[country][year].age  += age;
         }
     }
 
-    return countries;
-}
+    // console.log(dataByCountry);
 
-function getPartyCounts() {
-    partyCounts = {}
+    //normalise
+    //TODO: make relevant adjustments from: https://www.europeansocialsurvey.org/docs/methodology/ESS_weighting_data_1_1.pdf
+    for (country of Object.keys(dataByCountry)) {
+        for (year of Object.keys(dataByCountry[country])) {
+            let data = dataByCountry[country][year];
 
-    for(let i = 0; i < ess.length; i++) {
-        let interview = ess[i];
+            //interest - percentage average
+            data.interest /= data.total;
 
-        let party = interview.Party_voted_for_in_last_national_election;
-        let country = interview.Country;
-        
-        if ((selectedCountry == undefined) || (country == selectedCountry)) {
-            if (partyCounts[party] == undefined) {
-                partyCounts[party] = 1
-            }
-            else {
-                partyCounts[party] += 1
-            }
+            //trust - percentage average
+            data.trust /= data.total
+
+            //voted - percentage voted
+            data.voted = (data.voted / data.total) * 100;
+
+            //left right - average scale from -5 (very left) to +5 (very right)
+            data.leftRight /= data.total;
+
+            //immmigrant opionion - average scale from -5 (very negative) to +5 (very positive)
+            data.immigrants /= data.total;
+
+            //unemployment - percentage unemployed
+            data.unemployment = (data.unemployment / data.total) * 100;
+
+            //children - percentage with childeren
+            data.children = (data.children / data.total) * 100;
+
+            //age - average age
+            data.age /= data.total;
+
+            dataByCountry[country][year] = data;
         }
     }
-
-    //rename not applicable to didn't vote
-    Object.defineProperty(partyCounts, "Didn't Vote", Object.getOwnPropertyDescriptor(partyCounts, "Not applicable"));
-    delete partyCounts["Not applicable"];
-
-    return partyCounts;
 }
